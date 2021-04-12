@@ -1,14 +1,19 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react'
-import { StyleSheet, Text, View, SafeAreaView } from 'react-native'
-import { Avatar, SearchBar } from 'react-native-elements'
+import { StyleSheet, Text, View, SafeAreaView, Button } from 'react-native'
+import { Avatar } from 'react-native-elements'
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
 import { auth, db } from "../firebase"
 import { AntDesign, SimpleLineIcons } from "@expo/vector-icons"
+import CustomSearchBar from '../components/CustomSearchBar'
+import { StatusBar } from 'react-native'
+
 
 
 const HomeScreen = ({ navigation }) => {
 
-    const [search, setSearch] = useState("");
+    const [search, setSearch] = useState("Apple");
+
+
 
     const signOutUser = () => {
         auth.signOut().then(() => {
@@ -43,9 +48,10 @@ const HomeScreen = ({ navigation }) => {
     }, [navigation])
 
     return (
-        <View style={styles.container}>
-
-        </View>
+        <StatusBar ></StatusBar> >
+        <SafeAreaView style={styles.container}>
+            <CustomSearchBar setSearch={setSearch} search={search}></CustomSearchBar>
+        </SafeAreaView>
     )
 }
 
@@ -53,7 +59,6 @@ export default HomeScreen
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: "#fcbb39",
+        backgroundColor: "#f0a150",
     }
 })
