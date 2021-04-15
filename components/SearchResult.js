@@ -1,37 +1,38 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import { TouchableOpacity } from 'react-native-gesture-handler'
-import { Image } from 'react-native-elements'
 
-
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
+import { Avatar, ListItem, Image } from 'react-native-elements'
+import { SafeAreaView } from 'react-native'
 
 
 
 const SearchResult = ({ itemList }) => {
-    const renderListItems = () => {
-        () => {
-            if (itemList != null) {
-                return (
-                    itemList.articles.map((l, i) => (
-                        <ListItem key={i} bottomDivider>
-                            <Image source={{
-                                uri: l.urlToImage
-                            }}
-                                style={{ width: 180, height: 180 }} />
-                            <ListItem.Content>
-                                <ListItem.Title>{l.title}</ListItem.Title>
-                                <ListItem.Subtitle>{l.description}</ListItem.Subtitle>
-                            </ListItem.Content>
-                        </ListItem>
-                    )))
-            }
-
-        }
 
 
-    }
     return (
-        { renderListItems }
+        <ScrollView>
+            {itemList != null && (
+                itemList.articles.map((l, i) => (
+                    <ListItem key={i} bottomDivider>
+                        <View style={{ flex: 1, flexDirection: "row", justifyContent: "center" }}>
+                            <TouchableOpacity >
+                                <Image source={{
+                                    uri: l.urlToImage
+                                }}
+                                    style={{ width: 100, height: 100 }} />
+
+                                <ListItem.Content>
+                                    <ListItem.Title>{l.title}</ListItem.Title>
+                                    <ListItem.Subtitle>{l.description}</ListItem.Subtitle>
+                                </ListItem.Content>
+                            </TouchableOpacity>
+                        </View>
+                    </ListItem>
+
+                ))
+            )}
+        </ScrollView>
 
 
     )
