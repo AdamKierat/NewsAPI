@@ -12,7 +12,7 @@ import { StatusBar } from 'react-native'
 const HomeScreen = ({ navigation }) => {
 
     const [search, setSearch] = useState("Apple");
-    const [itemList, setItemList] = useState(null);
+    const [itemList, setItemList] = useState();
 
 
 
@@ -34,13 +34,18 @@ const HomeScreen = ({ navigation }) => {
         })
     }
 
-    const renderListItems = () => {
+    keyExtractor = (item, index) => index.toString()
 
-    }
-
-
-
-
+    renderItem = ({ item }) => (
+        <ListItem bottomDivider>
+            <Avatar source={{ uri: item.avatar_url }} />
+            <ListItem.Content>
+                <ListItem.Title>{item.name}</ListItem.Title>
+                <ListItem.Subtitle>{item.subtitle}</ListItem.Subtitle>
+            </ListItem.Content>
+            <ListItem.Chevron />
+        </ListItem>
+    )
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -78,18 +83,22 @@ const HomeScreen = ({ navigation }) => {
                 setItemList={setItemList} >
             </CustomSearchBar>
 
+            <ScrollView>
+                {itemList != null && (
+                    itemList.articles.map((l, i) => (
+                        <ListItem key={i} bottomDivider>
+                            <Avatar source={{
+                                uri: l.urlToImage
+                            }} />
+                            <ListItem.Content>
+                                <ListItem.Title>{l.title}</ListItem.Title>
+                                <ListItem.Subtitle>{l.description}</ListItem.Subtitle>
+                            </ListItem.Content>
+                        </ListItem>
+                    ))
+                )}
+            </ScrollView>
 
-            {
-                list.map((l, i) => (
-                    <ListItem key={i} bottomDivider>
-                        <Avatar source={{ uri: l.avatar_url }} />
-                        <ListItem.Content>
-                            <ListItem.Title>{l.name}</ListItem.Title>
-                            <ListItem.Subtitle>{l.subtitle}</ListItem.Subtitle>
-                        </ListItem.Content>
-                    </ListItem>
-                ))
-            }
 
 
 

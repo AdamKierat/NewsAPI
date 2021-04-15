@@ -4,16 +4,19 @@ import { StyleSheet, View, SafeAreaView, Text } from 'react-native'
 import { API_KEY } from '../utils/constants'
 
 const CustomSearchBar = ({ search, setSearch, itemList, setItemList }) => {
-    const [helpsearch, setHelpsearch] = useState(search)
+
+
+    const [apiURL, setApiURL] = useState()
     const getMoviesFromApiAsync = async () => {
+
+
         try {
             let response = await fetch(
-                'https://newsapi.org/v2/everything?q=${search}&sortBy=popularity&apiKey=fdd7b2e027824780b9cc5e13b04e0799'
+                'https://newsapi.org/v2/everything?q=' + search + '&sortBy=popularity&apiKey=' + API_KEY
             );
+            setApiURL('https://newsapi.org/v2/everything?q=${search}&sortBy=popularity&apiKey=fdd7b2e027824780b9cc5e13b04e0799')
             let json = await response.json();
             setItemList(json);
-            console.log(itemList);
-            //console.log(json)
             return json.movies;
         } catch (error) {
             console.error(error);
