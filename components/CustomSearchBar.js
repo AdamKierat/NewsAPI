@@ -1,15 +1,19 @@
 import React, { useState } from 'react'
 import { SearchBar } from 'react-native-elements'
 import { StyleSheet, View, SafeAreaView, Text } from 'react-native'
+import { API_KEY } from '../utils/constants'
 
-const CustomSearchBar = ({ search, setSearch }) => {
-
-    const getMoviesFromApiAsync = async (search) => {
+const CustomSearchBar = ({ search, setSearch, itemList, setItemList }) => {
+    const [helpsearch, setHelpsearch] = useState(search)
+    const getMoviesFromApiAsync = async () => {
         try {
             let response = await fetch(
-                'https://reactnative.dev/movies.json'
+                'https://newsapi.org/v2/everything?q=${search}&sortBy=popularity&apiKey=fdd7b2e027824780b9cc5e13b04e0799'
             );
             let json = await response.json();
+            setItemList(json);
+            console.log(itemList);
+            //console.log(json)
             return json.movies;
         } catch (error) {
             console.error(error);
@@ -24,6 +28,8 @@ const CustomSearchBar = ({ search, setSearch }) => {
             value={search}
             round
             showLoading
+            searchIcon={{ color: "#fff" }}
+            clearIcon={{ color: "#fff" }}
             containerStyle={{
                 backgroundColor: "#fb9327",
                 borderBottomColor: 'transparent',
@@ -34,7 +40,7 @@ const CustomSearchBar = ({ search, setSearch }) => {
                 backgroundColor: "#f0a150"
             }}
             inputStyle={{ color: '#fff' }}
-            onSubmitEditing={() => console.log(`User typed $}` + { search })}
+            onSubmitEditing={getMoviesFromApiAsync}
 
         />
     )
