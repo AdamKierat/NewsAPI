@@ -1,20 +1,51 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react'
-import { StyleSheet, Text, View, SafeAreaView } from 'react-native'
-import { Avatar, SearchBar } from 'react-native-elements'
+import { StyleSheet, Text, View, SafeAreaView, Button } from 'react-native'
+import { Avatar, ListItem } from 'react-native-elements'
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
 import { auth, db } from "../firebase"
 import { AntDesign, SimpleLineIcons } from "@expo/vector-icons"
+import CustomSearchBar from '../components/CustomSearchBar'
+import { StatusBar } from 'react-native'
+
 
 
 const HomeScreen = ({ navigation }) => {
 
-    const [search, setSearch] = useState("");
+    const [search, setSearch] = useState("Apple");
+    const [itemList, setItemList] = useState();
+
+
+
+    const list = [
+        {
+            name: 'Amy Farha',
+            avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
+            subtitle: 'Vice President'
+        },
+        {
+            name: 'Chris Jackson',
+            avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
+            subtitle: 'Vice Chairman'
+        },]
 
     const signOutUser = () => {
         auth.signOut().then(() => {
             navigation.replace('Login')
         })
     }
+
+    keyExtractor = (item, index) => index.toString()
+
+    renderItem = ({ item }) => (
+        <ListItem bottomDivider>
+            <Avatar source={{ uri: item.avatar_url }} />
+            <ListItem.Content>
+                <ListItem.Title>{item.name}</ListItem.Title>
+                <ListItem.Subtitle>{item.subtitle}</ListItem.Subtitle>
+            </ListItem.Content>
+            <ListItem.Chevron />
+        </ListItem>
+    )
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -43,9 +74,36 @@ const HomeScreen = ({ navigation }) => {
     }, [navigation])
 
     return (
-        <View style={styles.container}>
 
-        </View>
+        <SafeAreaView style={styles.container}>
+            <CustomSearchBar
+                search={search}
+                setSearch={setSearch}
+                itemList={itemList}
+                setItemList={setItemList} >
+            </CustomSearchBar>
+
+            <ScrollView>
+                {itemList != null && (
+                    itemList.articles.map((l, i) => (
+                        <ListItem key={i} bottomDivider>
+                            <Avatar source={{
+                                uri: l.urlToImage
+                            }} />
+                            <ListItem.Content>
+                                <ListItem.Title>{l.title}</ListItem.Title>
+                                <ListItem.Subtitle>{l.description}</ListItem.Subtitle>
+                            </ListItem.Content>
+                        </ListItem>
+                    ))
+                )}
+            </ScrollView>
+
+
+
+
+
+        </SafeAreaView>
     )
 }
 
@@ -54,6 +112,6 @@ export default HomeScreen
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#fcbb39",
+        backgroundColor: "#fff",
     }
 })
