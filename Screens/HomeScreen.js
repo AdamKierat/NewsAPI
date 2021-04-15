@@ -1,19 +1,20 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { StyleSheet, Text, View, SafeAreaView, Button } from 'react-native'
-import { Avatar, ListItem } from 'react-native-elements'
+import { Avatar, ListItem, Image } from 'react-native-elements'
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
 import { auth, db } from "../firebase"
 import { AntDesign, SimpleLineIcons } from "@expo/vector-icons"
 import CustomSearchBar from '../components/CustomSearchBar'
-import { StatusBar } from 'react-native'
-import SearchResult from '../components/SearchResult'
-
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import LoginScreen from './LoginScreen'
 
 const HomeScreen = ({ navigation }) => {
 
     const [search, setSearch] = useState("Apple");
     const [itemList, setItemList] = useState();
+    const [articles, setArticles] = useState([]);
 
+    const Tab = createMaterialBottomTabNavigator();
 
     const signOutUser = () => {
         auth.signOut().then(() => {
@@ -57,9 +58,36 @@ const HomeScreen = ({ navigation }) => {
                 itemList={itemList}
                 setItemList={setItemList} >
             </CustomSearchBar>
-            <SearchResult itemList={itemList} />
 
-        </SafeAreaView>
+
+            <ScrollView contentContainerStyle={{ justifyContent: "center" }}>
+                {itemList != null && (
+                    itemList.articles.map((selectedItem, index) => (
+                        <ListItem key={index} bottomDivider>
+                            <View>
+                                <TouchableOpacity onPress={() => navigation.navigate('Article', { article: selectedItem })} >
+
+                                    <Image source={{
+                                        uri: selectedItem.urlToImage
+                                    }}
+                                        style={{ width: 100, height: 100 }} />
+
+                                    <ListItem.Content>
+                                        <ListItem.Title >{selectedItem.title}</ListItem.Title>
+                                        <ListItem.Subtitle>{selectedItem.description}</ListItem.Subtitle>
+                                    </ListItem.Content>
+                                </TouchableOpacity>
+                            </View>
+                        </ListItem>
+
+                    ))
+                )}
+            </ScrollView>
+
+        </SafeAreaView >
+
+
+
     )
 }
 

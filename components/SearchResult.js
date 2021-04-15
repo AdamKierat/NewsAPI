@@ -9,13 +9,14 @@ import { SafeAreaView } from 'react-native'
 
 const SearchResult = ({ itemList }) => {
 
+
     return (
         <ScrollView>
             {itemList != null && (
                 itemList.articles.map((l, i) => (
                     <ListItem key={i} bottomDivider>
                         <View style={{ flex: 1, flexDirection: "row", justifyContent: "center" }}>
-                            <TouchableOpacity>
+                            <TouchableOpacity >
                                 <Image source={{
                                     uri: l.urlToImage
                                 }}
