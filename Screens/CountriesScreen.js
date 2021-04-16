@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { StyleSheet, View } from 'react-native'
-import { COUNTRY_LIST } from '../utils/constants'
+import { COUNTRY_LIST } from '../libs/countries'
 import { ListItem, Avatar } from 'react-native-elements'
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
 import { SafeAreaView } from 'react-native';
