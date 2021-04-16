@@ -6,6 +6,7 @@ import HomeScreen from './Screens/HomeScreen';
 import LoginScreen from './Screens/LoginScreen';
 import ArticleScreen from './Screens/ArticleScreen'
 import SearchResult from './components/SearchResult'
+import CountriesScreen from './Screens/CountriesScreen'
 
 const Stack = createStackNavigator();
 
@@ -20,13 +21,14 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Home"
+        initialRouteName="Login"
         screenOptions={globalScreenOptions}>
         <Stack.Screen name='Login' component={LoginScreen} />
         <Stack.Screen name='Register' component={RegisterScreen} />
         <Stack.Screen name='Home' component={HomeScreen} />
         <Stack.Screen name='Article' component={ArticleScreen} />
         <Stack.Screen name='Search' component={SearchResult} />
+        <Stack.Screen name='Countries' component={CountriesScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
