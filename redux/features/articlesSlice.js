@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { StatusTypes } from '../../lib/constants'
-import request from '../services/request'
+import request from '../../services/request'
 import { API_KEY } from '@env'
 
 
@@ -17,7 +17,7 @@ const articlesSlice = createSlice({
     name: 'articles',
     initialState: {
         items: [],
-        status: statusTypes.IDLE,
+        status: StatusTypes.IDLE,
         error: null
     },
     extraReducers: {

@@ -14,11 +14,11 @@ const CustomSearchBar = ({ search, setSearch, setItemList }) => {
 
     const getMoviesFromApiAsync = async () => {
 
-        if (projectStatus === 'IDLE') {
+        // if (articlesStatus === 'IDLE') {
 
-            dispatch(fetchArticlesByKeyword("Tesla"))
+        //     dispatch(fetchArticlesByKeyword("Tesla"))
 
-        }
+        // }
 
         try {
             let response = await fetch(
