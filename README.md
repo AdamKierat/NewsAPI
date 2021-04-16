@@ -18,8 +18,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-
-An app that displays current weather data using OpenWeather Api.
+An app that displays news articles with keyword search functionality
 ### Built With
 
 * [News API](https://newsapi.org/)
