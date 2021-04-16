@@ -9,7 +9,7 @@ import SearchResult from './components/SearchResult'
 import CountriesScreen from './Screens/CountriesScreen'
 
 const Stack = createStackNavigator();
-
+import { API_KEY } from '@env'
 const globalScreenOptions = {
   headerStyle: { backgroundColor: "#fb9327" },
   headerTitleStyle: { color: "white" },
@@ -18,6 +18,7 @@ const globalScreenOptions = {
 
 
 export default function App() {
+  console.log("APIKEY:" + API_KEY)
   return (
     <NavigationContainer>
       <Stack.Navigator
