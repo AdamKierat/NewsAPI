@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import { SearchBar } from 'react-native-elements'
 import { StyleSheet, View, SafeAreaView, Text } from 'react-native'
-import { API_KEY } from '../utils/constants'
-
+import { API_KEY } from '@env'
 
 const CustomSearchBar = ({ search, setSearch, setItemList }) => {
 
