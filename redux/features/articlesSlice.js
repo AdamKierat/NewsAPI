@@ -1,14 +1,14 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { StatusTypes } from '../lib/constants'
+import { StatusTypes } from '../../lib/constants'
 import request from '../services/request'
+import { API_KEY } from '@env'
 
 
 
-
-export const fetchProjects = createAsyncThunk('projects/fetchAll', async () => {
+export const fetchArticlesByKeyword = createAsyncThunk('articles/fetchByKeyword', async (keyword) => {
     return request({
         method: 'get',
-        url: 'Projects',
+        url: `everything/everything?q="${keyword}"&apiKey=${API_KEY}`,
     })
 })
 
@@ -21,14 +21,15 @@ const articlesSlice = createSlice({
         error: null
     },
     extraReducers: {
-        [fetchProjects.pending]: (state) => {
+        [fetchByKeyword.pending]: (state) => {
             state.status = statusTypes.LOADING
         },
-        [fetchProjects.fulfilled]: (state, action) => {
+        [fetchByKeyword.fulfilled]: (state, action) => {
             state.status = statusTypes.SUCCEEDED
-            state.items = action.payload.projectList
+            console.log(`API ZWROCILO: ${action.payload}`)
+            state.items = action.payload
         },
-        [fetchProjects.rejected]: (state, action) => {
+        [fetchByKeyword.rejected]: (state, action) => {
             state.status = statusTypes.FAILED
             state.error = action.payload
         },
