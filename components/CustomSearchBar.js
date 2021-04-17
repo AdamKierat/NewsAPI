@@ -2,23 +2,24 @@ import React, { useState } from 'react'
 import { SearchBar } from 'react-native-elements'
 import { StyleSheet, View, SafeAreaView, Text } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
-import { selectAll, fetchArticlesByKeyword } from '../redux/features/articlesSlice'
+import { selectAll, fetchByKeyword } from '../redux/features/articlesSlice'
 import { API_KEY } from '@env'
 
 const CustomSearchBar = ({ search, setSearch, setItemList }) => {
 
     const dispatch = useDispatch()
-    const projects = useSelector(selectAll)
+    const articles = useSelector(selectAll)
     const articlesStatus = useSelector(state => state.articles.status)
 
 
     const getMoviesFromApiAsync = async () => {
 
-        // if (articlesStatus === 'IDLE') {
+        if (articlesStatus === 'IDLE') {
 
-        //     dispatch(fetchArticlesByKeyword("Tesla"))
+            dispatch(fetchByKeyword(search))
 
-        // }
+        }
+        console.info(articles)
 
         try {
             let response = await fetch(

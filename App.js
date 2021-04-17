@@ -7,6 +7,8 @@ import LoginScreen from './screens/LoginScreen';
 import ArticleScreen from './screens/ArticleScreen'
 import SearchResult from './components/SearchResult'
 import CountriesScreen from './screens/CountriesScreen'
+import { Provider } from 'react-redux'
+import store from './redux/store'
 
 const Stack = createStackNavigator();
 
@@ -19,17 +21,19 @@ const globalScreenOptions = {
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Login"
-        screenOptions={globalScreenOptions}>
-        <Stack.Screen name='Login' component={LoginScreen} />
-        <Stack.Screen name='Register' component={RegisterScreen} />
-        <Stack.Screen name='Home' component={HomeScreen} />
-        <Stack.Screen name='Article' component={ArticleScreen} />
-        <Stack.Screen name='Search' component={SearchResult} />
-        <Stack.Screen name='Countries' component={CountriesScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator
+          initialRouteName="Login"
+          screenOptions={globalScreenOptions}>
+          <Stack.Screen name='Login' component={LoginScreen} />
+          <Stack.Screen name='Register' component={RegisterScreen} />
+          <Stack.Screen name='Home' component={HomeScreen} />
+          <Stack.Screen name='Article' component={ArticleScreen} />
+          <Stack.Screen name='Search' component={SearchResult} />
+          <Stack.Screen name='Countries' component={CountriesScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }

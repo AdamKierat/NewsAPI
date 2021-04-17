@@ -5,10 +5,10 @@ import { API_KEY } from '@env'
 
 
 
-export const fetchArticlesByKeyword = createAsyncThunk('articles/fetchByKeyword', async (keyword) => {
+export const fetchByKeyword = createAsyncThunk('articles/fetchByKeyword', async (keyword) => {
     return request({
         method: 'get',
-        url: `everything/everything?q="${keyword}"&apiKey=${API_KEY}`,
+        url: `everything?q="${keyword}"&apiKey=${API_KEY}`,
     })
 })
 
@@ -22,16 +22,17 @@ const articlesSlice = createSlice({
     },
     extraReducers: {
         [fetchByKeyword.pending]: (state) => {
-            state.status = statusTypes.LOADING
+            state.status = StatusTypes.LOADING
+            console.log('API ZAPYTANIE TRWA:')
         },
         [fetchByKeyword.fulfilled]: (state, action) => {
-            state.status = statusTypes.SUCCEEDED
-            console.log(`API ZWROCILO: ${action.payload}`)
-            state.items = action.payload
+            state.status = StatusTypes.SUCCEEDED
+            state.items = action.payload.articles
         },
         [fetchByKeyword.rejected]: (state, action) => {
-            state.status = statusTypes.FAILED
+            state.status = StatusTypes.FAILED
             state.error = action.payload
+            console.log('API error')
         },
     }
 })

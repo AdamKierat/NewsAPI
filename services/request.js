@@ -7,7 +7,7 @@ import { Constants } from '../lib/constants'
  * Create an Axios Client with defaults
  */
 const client = axios.create({
-    baseURL: constants.baseApiURL
+    baseURL: Constants.baseApiURL
 });
 
 
@@ -17,7 +17,7 @@ const client = axios.create({
  */
 const request = function (options) {
     const onSuccess = function (response) {
-        console.debug('Request Successful!', response);
+        //console.debug('Request Successful!', response);
         return response.data;
     }
 

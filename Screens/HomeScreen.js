@@ -6,13 +6,16 @@ import { auth, db } from "../firebase"
 import { AntDesign, SimpleLineIcons } from "@expo/vector-icons"
 import CustomSearchBar from '../components/CustomSearchBar'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-
+import { useSelector, useDispatch } from 'react-redux'
+import { selectAll } from '../redux/features/articlesSlice'
 const HomeScreen = ({ navigation }) => {
 
     const [search, setSearch] = useState("Apple");
     const [itemList, setItemList] = useState();
     const windowWidth = Dimensions.get('window').width;
     const windowHeight = Dimensions.get('window').height;
+
+    const articles = useSelector(selectAll)
 
     const Tab = createMaterialBottomTabNavigator();
 
