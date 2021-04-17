@@ -10,8 +10,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { selectAll } from '../redux/features/articlesSlice'
 const HomeScreen = ({ navigation }) => {
 
-    const [search, setSearch] = useState("Apple");
-    const [itemList, setItemList] = useState();
+
     const windowWidth = Dimensions.get('window').width;
     const windowHeight = Dimensions.get('window').height;
 
@@ -55,17 +54,13 @@ const HomeScreen = ({ navigation }) => {
     return (
 
         <SafeAreaView style={styles.container}>
-            <CustomSearchBar
-                search={search}
-                setSearch={setSearch}
-                itemList={itemList}
-                setItemList={setItemList} >
+            <CustomSearchBar>
             </CustomSearchBar>
 
 
             <ScrollView>
-                {itemList != null && (
-                    itemList.articles.map((selectedItem, index) => (
+                {articles != null && (
+                    articles.map((selectedItem, index) => (
                         <ListItem key={index} style={{ flex: 1 }}>
                             <SafeAreaView style={{ flex: 1, margin: -16 }}>
                                 <TouchableOpacity onPress={() => navigation.navigate('Article', { article: selectedItem })} >

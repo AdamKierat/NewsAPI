@@ -5,32 +5,21 @@ import { useSelector, useDispatch } from 'react-redux'
 import { selectAll, fetchByKeyword } from '../redux/features/articlesSlice'
 import { API_KEY } from '@env'
 
-const CustomSearchBar = ({ search, setSearch, setItemList }) => {
+const CustomSearchBar = () => {
 
+    const [keyword, setKeyword] = useState("Apple");
     const dispatch = useDispatch()
     const articles = useSelector(selectAll)
     const articlesStatus = useSelector(state => state.articles.status)
 
 
-    const getMoviesFromApiAsync = async () => {
+    const fetchArticles = async () => {
+        console.info(keyword)
+        console.info(articlesStatus)
+        if (articlesStatus === 'IDLE' || articlesStatus === 'SUCCEEDED') {
 
-        if (articlesStatus === 'IDLE') {
-
-            dispatch(fetchByKeyword(search))
-
-        }
-        console.info(articles)
-
-        try {
-            let response = await fetch(
-                'https://newsapi.org/v2/everything?q=' + search + '&sortBy=popularity&apiKey=' + API_KEY
-            );
-
-            let json = await response.json();
-            setItemList(json);
-            return json.movies;
-        } catch (error) {
-            console.error(error);
+            dispatch(fetchByKeyword(keyword))
+            console.info(articlesStatus)
         }
 
     };
@@ -39,11 +28,11 @@ const CustomSearchBar = ({ search, setSearch, setItemList }) => {
         <SearchBar
             placeholder="Type Here..."
             placeholderTextColor='#fff'
-            onChangeText={(text) => setSearch(text)}
-            value={search}
+            onChangeText={(text) => setKeyword(text)}
+            value={keyword}
             round
             showLoading
-            setSearch={getMoviesFromApiAsync}
+
             searchIcon={{ color: "#fff" }}
             clearIcon={{ color: "#fff" }}
             containerStyle={{
@@ -56,7 +45,7 @@ const CustomSearchBar = ({ search, setSearch, setItemList }) => {
                 backgroundColor: "#f0a150"
             }}
             inputStyle={{ color: '#fff' }}
-            onSubmitEditing={getMoviesFromApiAsync}
+            onSubmitEditing={fetchArticles}
 
         />
 

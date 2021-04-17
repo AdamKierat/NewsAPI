@@ -23,16 +23,16 @@ const articlesSlice = createSlice({
     extraReducers: {
         [fetchByKeyword.pending]: (state) => {
             state.status = StatusTypes.LOADING
-            console.log('API ZAPYTANIE TRWA:')
+            console.info('API ZAPYTANIE TRWA:')
         },
         [fetchByKeyword.fulfilled]: (state, action) => {
             state.status = StatusTypes.SUCCEEDED
             state.items = action.payload.articles
+            console.info(action.payload.articles[0])
         },
         [fetchByKeyword.rejected]: (state, action) => {
             state.status = StatusTypes.FAILED
             state.error = action.payload
-            console.log('API error')
         },
     }
 })
