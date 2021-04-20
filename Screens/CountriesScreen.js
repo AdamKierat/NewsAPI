@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { StyleSheet, View } from 'react-native'
-import countryList from '../lib/countries.js'
+import { countryList } from '../lib/countries.js'
 import { ListItem, Avatar } from 'react-native-elements'
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
 import { SafeAreaView } from 'react-native';
@@ -12,7 +12,7 @@ const CountriesScreen = () => {
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView>
-                {COUNTRY_LIST.map((selectedItem, id) => (
+                {countryList.map((selectedItem, id) => (
                     <TouchableOpacity>
                         <View style={{ flex: 1, backgroundColor: "orange" }} >
                             <ListItem key={id} bottomDivider>
