@@ -62,7 +62,7 @@ const HomeScreen = ({ navigation }) => {
                 {articles != null && (
                     articles.map((selectedItem, index) => (
                         <ListItem key={index} style={{ flex: 1 }}>
-                            <SafeAreaView style={{ flex: 1, margin: -16 }}>
+                            <View style={{ flex: 1, margin: -16 }}>
                                 <TouchableOpacity onPress={() => navigation.navigate('Article', { article: selectedItem })} >
 
                                     <Image source={{
@@ -76,7 +76,7 @@ const HomeScreen = ({ navigation }) => {
                                         </ListItem.Content>
                                     </View>
                                 </TouchableOpacity>
-                            </SafeAreaView>
+                            </View>
                         </ListItem>
 
                     ))
