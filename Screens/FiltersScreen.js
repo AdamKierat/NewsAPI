@@ -1,14 +1,14 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
-const CategoriesScreen = () => {
+const FiltersScreen = () => {
     return (
         <View>
-            <Text>CategoriesScreen</Text>
+            <Text>FiltersScreen - tutaj dwa guziki z wyborem czy kraje czy kategorie</Text>
         </View>
     )
 }
 
-export default CategoriesScreen
+export default FiltersScreen
 
 const styles = StyleSheet.create({})

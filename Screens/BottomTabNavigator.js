@@ -9,7 +9,7 @@ import FavoritesScreen from "./FavoritesScreen"
 import { View } from "react-native";
 import { auth, db } from "../firebase";
 import { SimpleLineIcons } from "@expo/vector-icons";
-import CategoriesScreen from "./CategoriesScreen";
+import FiltersScreen from "./FiltersScreen";
 
 
 const Tab = createBottomTabNavigator();
@@ -79,15 +79,15 @@ const BottomTabNavigator = ({ navigation }) => {
                 />)}
             </Tab.Screen>
             <Tab.Screen
-                name="Categories"
+                name="Filters"
                 options={{
-                    tabBarLabel: "Categories",
+                    tabBarLabel: "Filters",
                     tabBarIcon: ({ color }) => (
                         <MaterialCommunityIcons name="view-list-outline" color={color} size={30} />
                     ),
                 }}
             >
-                {(props) => (<CategoriesScreen
+                {(props) => (<FiltersScreen
                     {...props}
                     navigation={navigation}
                 />)}

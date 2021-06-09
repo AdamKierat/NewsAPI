@@ -12,7 +12,7 @@ import BottomTabNavigator from './screens/BottomTabNavigator';
 import { Provider } from 'react-redux'
 import store from './redux/store'
 import SettingsScreen from './screens/SettingsScreen';
-import CategoriesScreen from './screens/CategoriesScreen';
+import FiltersScreen from './screens/FiltersScreen';
 
 
 const Stack = createStackNavigator();
@@ -36,7 +36,7 @@ export default function App() {
           <Stack.Screen name='Home' component={HomeScreen} />
           <Stack.Screen name='Settings' component={SettingsScreen} />
           <Stack.Screen name='Favorites' component={FavoritesScreen} />
-          <Stack.Screen name='Categories' component={CategoriesScreen} />
+          <Stack.Screen name='Categories' component={FiltersScreen} />
           <Stack.Screen name='Article' component={ArticleScreen} />
           <Stack.Screen name='Search' component={SearchResult} />
           <Stack.Screen name='Countries' component={CountriesScreen} />
