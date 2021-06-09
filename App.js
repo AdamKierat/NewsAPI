@@ -5,7 +5,6 @@ import RegisterScreen from './screens/RegisterScreen';
 import HomeScreen from './screens/HomeScreen';
 import LoginScreen from './screens/LoginScreen';
 import ArticleScreen from './screens/ArticleScreen'
-import SearchResult from './components/SearchResult'
 import CountriesScreen from './screens/CountriesScreen'
 import FavoritesScreen from './screens/FavoritesScreen';
 import BottomTabNavigator from './screens/BottomTabNavigator';
@@ -38,7 +37,6 @@ export default function App() {
           <Stack.Screen name='Favorites' component={FavoritesScreen} />
           <Stack.Screen name='Categories' component={FiltersScreen} />
           <Stack.Screen name='Article' component={ArticleScreen} />
-          <Stack.Screen name='Search' component={SearchResult} />
           <Stack.Screen name='Countries' component={CountriesScreen} />
           <Stack.Screen name='BottomTab' component={BottomTabNavigator} />
         </Stack.Navigator>
