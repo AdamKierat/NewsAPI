@@ -6,6 +6,7 @@ import { auth, db } from "../firebase"
 import CustomSearchBar from '../components/CustomSearchBar'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectAll } from '../redux/features/articlesSlice'
+import ArticleRowItem from '../components/ArticleRowItem'
 const HomeScreen = ({ navigation }) => {
 
 
@@ -31,24 +32,8 @@ const HomeScreen = ({ navigation }) => {
             <ScrollView>
                 {articles != null && (
                     articles.map((selectedItem, index) => (
-                        <ListItem key={index} style={{ flex: 1 }}>
-                            <View style={{ flex: 1, margin: -16 }}>
-                                <TouchableOpacity onPress={() => navigation.navigate('Article', { article: selectedItem })} >
-
-                                    <Image source={{
-                                        uri: selectedItem.urlToImage
-                                    }}
-                                        style={{ width: windowWidth, height: 230, marginBottom: -3 }} />
-                                    <View style={{ backgroundColor: "#ff9933", height: 55 }}>
-                                        <ListItem.Content>
-                                            <ListItem.Title style={{ fontSize: 20, fontWeight: "bold", color: "black", textAlign: "center" }} >{selectedItem.title}</ListItem.Title>
-                                            {/* <ListItem.Subtitle>{selectedItem.description}</ListItem.Subtitle> */}
-                                        </ListItem.Content>
-                                    </View>
-                                </TouchableOpacity>
-                            </View>
-                        </ListItem>
-
+                        <ArticleRowItem article={selectedItem} onPress={() => navigation.navigate('Article', { article: selectedItem })}
+                            windowWidth={windowWidth} windowHeight={windowHeight} />
                     ))
                 )}
             </ScrollView>
