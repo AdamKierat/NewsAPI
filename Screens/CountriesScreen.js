@@ -40,7 +40,6 @@ const CountriesScreen = ({navigation}) => {
                         </View>
                     </TouchableOpacity>
                 ))}
-
             </ScrollView>
         </SafeAreaView>
     )
