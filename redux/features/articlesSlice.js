@@ -18,6 +18,13 @@ export const fetchByCountry = createAsyncThunk('articles/fetchByCountry', async 
     })
 })
 
+export const fetchByCategory = createAsyncThunk('articles/fetchByCategory', async (category) => {
+    return request({
+        method: 'get',
+        url: `top-headlines?category=${category}&apiKey=${API_KEY}`,
+    })
+})
+
 
 const articlesSlice = createSlice({
     name: 'articles',
@@ -35,7 +42,6 @@ const articlesSlice = createSlice({
         [fetchByKeyword.fulfilled]: (state, action) => {
             state.status = StatusTypes.SUCCEEDED
             state.items = action.payload.articles
-            console.info(action.payload.articles[0])
         },
         [fetchByKeyword.rejected]: (state, action) => {
             state.status = StatusTypes.FAILED
@@ -45,14 +51,25 @@ const articlesSlice = createSlice({
         // by country
         [fetchByCountry.pending]: (state) => {
             state.status = StatusTypes.LOADING
-            console.info('API ZAPYTANIE TRWA:')
         },
         [fetchByCountry.fulfilled]: (state, action) => {
             state.status = StatusTypes.SUCCEEDED
             state.items = action.payload.articles
-            console.info(action.payload.articles[0])
         },
         [fetchByCountry.rejected]: (state, action) => {
+            state.status = StatusTypes.FAILED
+            state.error = action.payload
+        },
+
+        // by category
+        [fetchByCategory.pending]: (state) => {
+            state.status = StatusTypes.LOADING
+        },
+        [fetchByCategory.fulfilled]: (state, action) => {
+            state.status = StatusTypes.SUCCEEDED
+            state.items = action.payload.articles
+        },
+        [fetchByCategory.rejected]: (state, action) => {
             state.status = StatusTypes.FAILED
             state.error = action.payload
         },
