@@ -11,7 +11,6 @@ import { auth, db } from "../firebase";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import FiltersScreen from "./FiltersScreen";
 
-
 const Tab = createBottomTabNavigator();
 
 const BottomTabNavigator = ({ navigation }) => {

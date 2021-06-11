@@ -25,7 +25,7 @@ const CountriesScreen = () => {
                                 />
 
                                 <ListItem.Content>
-                                    <ListItem.Title >{selectedItem.name}</ListItem.Title>
+                                    <ListItem.Title >{selectedItem.fullname}</ListItem.Title>
                                 </ListItem.Content>
 
 
