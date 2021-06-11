@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
-import { SearchBar } from 'react-native-elements'
-import { StyleSheet, View, SafeAreaView, Text } from 'react-native'
-import { useSelector, useDispatch } from 'react-redux'
-import { selectAll, fetchByKeyword } from '../redux/features/articlesSlice'
-import { API_KEY } from '@env'
+import React, {useState} from 'react'
+import {SearchBar} from 'react-native-elements'
+import {StyleSheet} from 'react-native'
+import {useDispatch, useSelector} from 'react-redux'
+import {fetchByKeyword, selectAll} from '../redux/features/articlesSlice'
 
 const CustomSearchBar = () => {
 
@@ -17,11 +16,9 @@ const CustomSearchBar = () => {
         console.info(keyword)
         console.info(articlesStatus)
         if (articlesStatus === 'IDLE' || articlesStatus === 'SUCCEEDED') {
-
             dispatch(fetchByKeyword(keyword))
             console.info(articlesStatus)
         }
-
     };
     return (
 
@@ -33,8 +30,8 @@ const CustomSearchBar = () => {
             round
             showLoading
 
-            searchIcon={{ color: "#fff" }}
-            clearIcon={{ color: "#fff" }}
+            searchIcon={{color: "#fff"}}
+            clearIcon={{color: "#fff"}}
             containerStyle={{
                 backgroundColor: "#fb9327",
                 borderBottomColor: 'transparent',
@@ -44,7 +41,7 @@ const CustomSearchBar = () => {
             inputContainerStyle={{
                 backgroundColor: "#f0a150"
             }}
-            inputStyle={{ color: '#fff' }}
+            inputStyle={{color: '#fff'}}
             onSubmitEditing={fetchArticles}
 
         />
