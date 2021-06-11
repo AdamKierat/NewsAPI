@@ -1,21 +1,21 @@
 import React from 'react'
 import {SafeAreaView, StyleSheet, View} from 'react-native'
-import {countryList} from '../lib/countries.js'
-import {Avatar, ListItem} from 'react-native-elements'
+import {categoryList} from '../lib/categories.js'
+import {ListItem} from 'react-native-elements'
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler'
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import {useDispatch, useSelector} from 'react-redux'
-import {fetchByKeyword, selectAll} from '../redux/features/articlesSlice'
+import {fetchByCategory, selectAll} from '../redux/features/articlesSlice'
 
-const CountriesScreen = ({navigation}) => {
+const CategoriesScreen = ({navigation}) => {
     const dispatch = useDispatch()
     const articles = useSelector(selectAll)
     const articlesStatus = useSelector(state => state.articles.status)
 
-    const fetchArticles = async (country) => {
-        console.log(country)
+    const fetchArticles = async (category) => {
+        console.log(category)
         if (articlesStatus === 'IDLE' || articlesStatus === 'SUCCEEDED') {
-            dispatch(fetchByKeyword(country))
-            console.info(articlesStatus)
+            dispatch(fetchByCategory(category))
         }
         navigation.replace('BottomTab')
     };
@@ -23,18 +23,16 @@ const CountriesScreen = ({navigation}) => {
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView>
-                {countryList.map((selectedItem, id) => (
-                    <TouchableOpacity onPress={() => fetchArticles(selectedItem.name)}>
+                {categoryList.map((selectedItem, id) => (
+                    <TouchableOpacity
+                        style={styles.tile}
+                        onPress={() => fetchArticles(selectedItem.category_name)}
+                    >
                         <View style={{flex: 1, backgroundColor: "orange"}}>
                             <ListItem key={id} bottomDivider>
-                                <Avatar source={{
-                                    uri: selectedItem.flag_url
-                                }}
-                                        rounded
-                                        size="medium"
-                                />
+                            <MaterialCommunityIcons name={selectedItem.logo_name} size={24} color='black'/>
                                 <ListItem.Content>
-                                    <ListItem.Title>{selectedItem.fullname}</ListItem.Title>
+                                    <ListItem.Title>{selectedItem.category_name}</ListItem.Title>
                                 </ListItem.Content>
                             </ListItem>
                         </View>
@@ -45,12 +43,14 @@ const CountriesScreen = ({navigation}) => {
     )
 }
 
-export default CountriesScreen
+export default CategoriesScreen
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'row',
-
     },
+    tile: {
+        padding: 10,
+    }
 })
