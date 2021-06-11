@@ -7,6 +7,8 @@ import CustomSearchBar from '../components/CustomSearchBar'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectAll } from '../redux/features/articlesSlice'
 import ArticleRowItem from '../components/ArticleRowItem'
+
+
 const HomeScreen = ({ navigation }) => {
 
 

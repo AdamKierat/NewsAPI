@@ -1,19 +1,20 @@
-import React, { useLayoutEffect, useState } from "react";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import React, {useLayoutEffect} from "react";
+import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import { Avatar, ListItem, Image } from 'react-native-elements'
-import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
+import {Avatar} from 'react-native-elements'
+import {TouchableOpacity} from 'react-native-gesture-handler'
 import HomeScreen from "./HomeScreen"
 import SettingsScreen from "./SettingsScreen"
 import FavoritesScreen from "./FavoritesScreen"
-import { View } from "react-native";
-import { auth, db } from "../firebase";
-import { SimpleLineIcons } from "@expo/vector-icons";
+import {View} from "react-native";
+import {auth} from "../firebase";
+import {SimpleLineIcons} from "@expo/vector-icons";
 import FiltersScreen from "./FiltersScreen";
+import CountriesScreen from "./CountriesScreen";
 
 const Tab = createBottomTabNavigator();
 
-const BottomTabNavigator = ({ navigation }) => {
+const BottomTabNavigator = ({navigation}) => {
 
     const signOutUser = () => {
         auth.signOut().then(() => {
@@ -23,12 +24,12 @@ const BottomTabNavigator = ({ navigation }) => {
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "NewsAPI",
-            headerTitleStyle: { color: "black", },
+            headerTitleStyle: {color: "black",},
             headerTintColor: "black",
             headerLeft: () => (
-                <View style={{ marginLeft: 15 }}>
+                <View style={{marginLeft: 15}}>
                     <TouchableOpacity activeOpacity={0.5}>
-                        <Avatar rounded source={{ uri: auth?.currentUser?.photoURL }} />
+                        <Avatar rounded source={{uri: auth?.currentUser?.photoURL}}/>
                     </TouchableOpacity>
                 </View>
             ),
@@ -48,12 +49,11 @@ const BottomTabNavigator = ({ navigation }) => {
 
 
     return (
-
         <Tab.Navigator
             initialRouteName="BottomTab"
             activeColor="#fb9327"
             inactiveColor="#fb9327"
-            style={{ backgroundColor: "#fb9327" }}
+            style={{backgroundColor: "#fb9327"}}
             tabBarOptions={{
                 activeTintColor: '#fff',
                 inactiveTintColor: 'lightgray',
@@ -66,7 +66,7 @@ const BottomTabNavigator = ({ navigation }) => {
                 name="HomeScreen"
                 options={{
                     tabBarLabel: "Home",
-                    tabBarIcon: ({ color }) => (
+                    tabBarIcon: ({color}) => (
                         <MaterialCommunityIcons name="home" color={color} size={30}
                         />
                     ),
@@ -81,24 +81,22 @@ const BottomTabNavigator = ({ navigation }) => {
                 name="Filters"
                 options={{
                     tabBarLabel: "Filters",
-                    tabBarIcon: ({ color }) => (
-                        <MaterialCommunityIcons name="view-list-outline" color={color} size={30} />
+                    tabBarIcon: ({color}) => (
+                        <MaterialCommunityIcons name="view-list-outline" color={color} size={30}/>
                     ),
                 }}
             >
-                {(props) => (<FiltersScreen
+                {(props) => (<CountriesScreen
                     {...props}
                     navigation={navigation}
                 />)}
             </Tab.Screen>
-
-
             <Tab.Screen
                 name="Favorites"
                 options={{
                     tabBarLabel: "Favorites",
-                    tabBarIcon: ({ color }) => (
-                        <MaterialCommunityIcons name="heart" color={color} size={30} />
+                    tabBarIcon: ({color}) => (
+                        <MaterialCommunityIcons name="heart" color={color} size={30}/>
                     ),
                 }}
             >
@@ -107,15 +105,13 @@ const BottomTabNavigator = ({ navigation }) => {
                     navigation={navigation}
                 />)}
             </Tab.Screen>
-
-
             <Tab.Screen
                 name="Settings"
                 options={{
                     activeTintColor: '#81B247',
                     tabBarLabel: "Settings",
-                    tabBarIcon: ({ color }) => (
-                        <MaterialCommunityIcons name="cog" color={color} size={30} />
+                    tabBarIcon: ({color}) => (
+                        <MaterialCommunityIcons name="cog" color={color} size={30}/>
                     ),
                 }}
             >
@@ -125,7 +121,7 @@ const BottomTabNavigator = ({ navigation }) => {
                 />)}
             </Tab.Screen>
         </Tab.Navigator>
-
     );
 };
+
 export default BottomTabNavigator;
