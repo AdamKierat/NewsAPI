@@ -6,11 +6,10 @@ import { format } from "date-fns";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 
-export default function ArticleRowItem({ article, onPress, windowHeight, windowWidth }) {
-
+export default function ArticleRowItem({ article, onPress, windowHeight, windowWidth, index }) {
 
     return (
-        <TouchableOpacity style={styles.container} onPress={onPress}>
+        <TouchableOpacity style={styles.container} onPress={onPress} key={index}>
             <Image source={{
                 uri: article.urlToImage
             }}
