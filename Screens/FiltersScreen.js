@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
-const FiltersScreen = () => {
+const FiltersScreen = ({ navigation }) => {
     return (
         <View>
             <Text>FiltersScreen - tutaj dwa guziki z wyborem czy kraje czy kategorie</Text>

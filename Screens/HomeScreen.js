@@ -8,9 +8,10 @@ import { useSelector, useDispatch } from 'react-redux'
 import { selectAll } from '../redux/features/articlesSlice'
 import ArticleRowItem from '../components/ArticleRowItem'
 
-
 const HomeScreen = ({ navigation }) => {
 
+    const isDark = useSelector((state) => state.darkMode.isDark)
+    const dispatch = useDispatch()
 
     const windowWidth = Dimensions.get('window').width;
     const windowHeight = Dimensions.get('window').height;
@@ -26,7 +27,7 @@ const HomeScreen = ({ navigation }) => {
 
     return (
 
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView style={[styles.container, { backgroundColor: isDark ? "black" : "#fff" }]}>
             <CustomSearchBar>
             </CustomSearchBar>
 
@@ -47,6 +48,6 @@ export default HomeScreen
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#fff",
+        // backgroundColor: isDark ? "#fb9327" : "black"
     }
 })

@@ -13,6 +13,8 @@ import store from './redux/store'
 import SettingsScreen from './screens/SettingsScreen';
 import FiltersScreen from './screens/FiltersScreen';
 import CategoriesScreen from './screens/CategoriesScreen';
+import { useSelector, useDispatch } from 'react-redux'
+
 
 const Stack = createStackNavigator();
 
@@ -21,9 +23,9 @@ const globalScreenOptions = {
   headerTitleStyle: { color: "white" },
   headerTintColor: "white",
 }
-
-
 export default function App() {
+
+
   return (
     <Provider store={store}>
       <NavigationContainer>
