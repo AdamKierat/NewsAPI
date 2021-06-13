@@ -10,7 +10,6 @@ import {View} from "react-native";
 import {auth} from "../firebase";
 import {SimpleLineIcons} from "@expo/vector-icons";
 import FiltersScreen from "./FiltersScreen";
-import CountriesScreen from "./CountriesScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -40,7 +39,7 @@ const BottomTabNavigator = ({navigation}) => {
                     width: 40,
                 }}>
                     <TouchableOpacity onPress={signOutUser} activeOpacity={0.5} pressMagnification={0.5}>
-                        <SimpleLineIcons name='logout' size={24} color='black'></SimpleLineIcons>
+                        <SimpleLineIcons name='logout' size={24} color='black'/>
                     </TouchableOpacity>
                 </View>
             )
@@ -86,7 +85,7 @@ const BottomTabNavigator = ({navigation}) => {
                     ),
                 }}
             >
-                {(props) => (<CountriesScreen
+                {(props) => (<FiltersScreen
                     {...props}
                     navigation={navigation}
                 />)}
