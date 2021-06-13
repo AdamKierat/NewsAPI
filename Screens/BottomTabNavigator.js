@@ -38,7 +38,6 @@ const BottomTabNavigator = ({ navigation }) => {
                     justifyContent: 'space-between',
                     width: 40,
                 }}>
-
                 </View>
             )
         })
