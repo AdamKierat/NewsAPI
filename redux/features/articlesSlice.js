@@ -1,7 +1,7 @@
-import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
-import {StatusTypes} from '../../lib/constants'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { StatusTypes } from '../../lib/constants'
 import request from '../../services/request'
-import {API_KEY} from '@env'
+import { API_KEY } from '@env'
 
 
 export const fetchByKeyword = createAsyncThunk('articles/fetchByKeyword', async (keyword) => {

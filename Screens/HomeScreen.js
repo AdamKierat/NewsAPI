@@ -35,7 +35,7 @@ const HomeScreen = ({ navigation }) => {
                 {articles != null && (
                     articles.map((selectedItem, index) => (
                         <ArticleRowItem article={selectedItem} onPress={() => navigation.navigate('Article', { article: selectedItem })}
-                            windowWidth={windowWidth} windowHeight={windowHeight} />
+                            windowWidth={windowWidth} windowHeight={windowHeight} index={index} />
                     ))
                 )}
             </ScrollView>
