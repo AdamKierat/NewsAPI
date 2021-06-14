@@ -1,16 +1,16 @@
-import React, {useState} from 'react'
-import {SearchBar} from 'react-native-elements'
-import {StyleSheet} from 'react-native'
-import {useDispatch, useSelector} from 'react-redux'
-import {fetchByKeyword, selectAll} from '../redux/features/articlesSlice'
+import React, { useState } from 'react'
+import { SearchBar } from 'react-native-elements'
+import { StyleSheet } from 'react-native'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchByKeyword, selectAll } from '../redux/features/articlesSlice'
+
 
 const CustomSearchBar = () => {
 
     const [keyword, setKeyword] = useState("Apple");
     const dispatch = useDispatch()
-    const articles = useSelector(selectAll)
     const articlesStatus = useSelector(state => state.articles.status)
-
+    const isDark = useSelector((state) => state.darkMode.isDark)
 
     const fetchArticles = async () => {
         console.info(keyword)
@@ -29,19 +29,18 @@ const CustomSearchBar = () => {
             value={keyword}
             round
             showLoading
-
-            searchIcon={{color: "#fff"}}
-            clearIcon={{color: "#fff"}}
+            searchIcon={{ color: "#fff" }}
+            clearIcon={{ color: "#fff" }}
             containerStyle={{
-                backgroundColor: "#fb9327",
+                backgroundColor: isDark ? "#4F3112" : "#fb9327",
                 borderBottomColor: 'transparent',
                 borderTopColor: 'transparent'
             }
             }
             inputContainerStyle={{
-                backgroundColor: "#f0a150"
+                backgroundColor: isDark ? "#6C4C2A" : "#f0a150"
             }}
-            inputStyle={{color: '#fff'}}
+            inputStyle={{ color: '#fff' }}
             onSubmitEditing={fetchArticles}
 
         />

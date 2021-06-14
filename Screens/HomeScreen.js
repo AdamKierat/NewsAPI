@@ -1,19 +1,15 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react'
-import { StyleSheet, Text, View, SafeAreaView, Dimensions } from 'react-native'
-import { Avatar, ListItem, Image } from 'react-native-elements'
-import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
-import { auth, db } from "../firebase"
+import React from 'react'
+import { StyleSheet, SafeAreaView } from 'react-native'
+import { ScrollView } from 'react-native-gesture-handler'
+import { auth } from "../firebase"
 import CustomSearchBar from '../components/CustomSearchBar'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { selectAll } from '../redux/features/articlesSlice'
 import ArticleRowItem from '../components/ArticleRowItem'
 
-
 const HomeScreen = ({ navigation }) => {
 
-
-    const windowWidth = Dimensions.get('window').width;
-    const windowHeight = Dimensions.get('window').height;
+    const isDark = useSelector((state) => state.darkMode.isDark)
 
     const articles = useSelector(selectAll)
 
@@ -26,7 +22,7 @@ const HomeScreen = ({ navigation }) => {
 
     return (
 
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView style={[styles.container, { backgroundColor: isDark ? "#120f0f" : "#fff" }]}>
             <CustomSearchBar>
             </CustomSearchBar>
 
@@ -35,7 +31,7 @@ const HomeScreen = ({ navigation }) => {
                 {articles != null && (
                     articles.map((selectedItem, index) => (
                         <ArticleRowItem article={selectedItem} onPress={() => navigation.navigate('Article', { article: selectedItem })}
-                            windowWidth={windowWidth} windowHeight={windowHeight} index={index} />
+                            index={index} />
                     ))
                 )}
             </ScrollView>
@@ -47,6 +43,6 @@ export default HomeScreen
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#fff",
+        // backgroundColor: isDark ? "#fb9327" : "black"
     }
 })
