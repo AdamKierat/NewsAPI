@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useLayoutEffect, useState } from "react";
 import { StyleSheet, Text, View, Dimensions, Linking } from 'react-native'
 import { Image } from 'react-native-elements'
 import { ScrollView } from 'react-native-gesture-handler';
@@ -6,16 +6,55 @@ import { Divider } from 'react-native-elements';
 import { format } from "date-fns";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { useSelector } from 'react-redux'
-
+import { TouchableOpacity } from "react-native-gesture-handler";
 const ArticleScreen = ({ route, navigation }) => {
     const { article, otherParam } = route.params;
     const isDark = useSelector((state) => state.darkMode.isDark)
+
+    const [favpressed, setFavpressed] = useState(false);
+    const [iconColor, seticonColor] = useState("white");
+
+    const changefavoriteincon = () => {
+        if (favpressed == true) {
+            seticonColor("white");
+            setFavpressed(false);
+        } else {
+            seticonColor("red");
+            setFavpressed(true);
+        }
+    };
+
 
     const loadInBrowser = () => {
         Linking.openURL(article.url)
             .catch(err => console.error("Couldn't load page", err));
     };
 
+    useLayoutEffect(() => {
+        navigation.setOptions({
+            headerRight: () => (
+                <View
+                    style={{
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                        width: 50,
+                    }}
+                >
+                    <TouchableOpacity
+                        onPress={changefavoriteincon}
+                        activeOpacity={0.5}
+                        pressMagnification={0.5}
+                    >
+                        <MaterialCommunityIcons
+                            name="cards-heart"
+                            size={30}
+                            color={iconColor}
+                        ></MaterialCommunityIcons>
+                    </TouchableOpacity>
+                </View>
+            ),
+        });
+    }, [navigation, iconColor]);
 
     return (
         <View style={[styles.container, { backgroundColor: isDark ? "#272121" : "#fff" }]}>
