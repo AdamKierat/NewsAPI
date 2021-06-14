@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { View } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
 import { switchMode } from './../redux/features/darkModeSlice'
 import { Switch, Text, Button } from 'react-native-elements';
@@ -49,7 +49,4 @@ const SettingsScreen = ({ navigation }) => {
         </View>
     )
 }
-
 export default SettingsScreen
-
-const styles = StyleSheet.create({})

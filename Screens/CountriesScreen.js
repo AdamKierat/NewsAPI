@@ -4,11 +4,10 @@ import { countryList } from '../lib/countries.js'
 import { Avatar, ListItem } from 'react-native-elements'
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchByKeyword, selectAll } from '../redux/features/articlesSlice'
+import { fetchByKeyword } from '../redux/features/articlesSlice'
 
 const CountriesScreen = ({ navigation }) => {
     const dispatch = useDispatch()
-    const articles = useSelector(selectAll)
     const articlesStatus = useSelector(state => state.articles.status)
     const isDark = useSelector((state) => state.darkMode.isDark)
 
@@ -57,6 +56,5 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'row',
-
     },
 })

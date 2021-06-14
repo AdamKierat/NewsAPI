@@ -5,7 +5,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { Divider } from 'react-native-elements';
 import { format } from "date-fns";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 const ArticleScreen = ({ route, navigation }) => {
     const { article, otherParam } = route.params;

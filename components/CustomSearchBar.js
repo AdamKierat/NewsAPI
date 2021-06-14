@@ -9,7 +9,6 @@ const CustomSearchBar = () => {
 
     const [keyword, setKeyword] = useState("Apple");
     const dispatch = useDispatch()
-    const articles = useSelector(selectAll)
     const articlesStatus = useSelector(state => state.articles.status)
     const isDark = useSelector((state) => state.darkMode.isDark)
 
@@ -30,7 +29,6 @@ const CustomSearchBar = () => {
             value={keyword}
             round
             showLoading
-
             searchIcon={{ color: "#fff" }}
             clearIcon={{ color: "#fff" }}
             containerStyle={{

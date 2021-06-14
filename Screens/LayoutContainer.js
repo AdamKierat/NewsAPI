@@ -11,7 +11,7 @@ import BottomTabNavigator from './BottomTabNavigator';
 import SettingsScreen from './SettingsScreen';
 import FiltersScreen from './FiltersScreen';
 import CategoriesScreen from './CategoriesScreen';
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 const Stack = createStackNavigator();
 

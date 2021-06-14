@@ -9,7 +9,6 @@ import { fetchByCategory, selectAll } from '../redux/features/articlesSlice'
 
 const CategoriesScreen = ({ navigation }) => {
     const dispatch = useDispatch()
-    const articles = useSelector(selectAll)
     const articlesStatus = useSelector(state => state.articles.status)
     const isDark = useSelector((state) => state.darkMode.isDark)
 

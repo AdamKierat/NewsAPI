@@ -9,7 +9,7 @@ import { useSelector, useDispatch } from 'react-redux'
 export default function ArticleRowItem({ article, onPress, index }) {
 
     const isDark = useSelector((state) => state.darkMode.isDark)
-    const dispatch = useDispatch()
+
     return (
         <TouchableOpacity style={[styles.container, { backgroundColor: isDark ? "#272121" : "#E9E9E9" }]} onPress={onPress} key={index}>
             <Image source={{

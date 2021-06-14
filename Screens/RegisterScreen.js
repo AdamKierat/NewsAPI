@@ -1,7 +1,7 @@
-import React, { useState, useLayoutEffect } from 'react'
+import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native'
 import { View, StyleSheet } from 'react-native'
-import { Button, Input, Image, Text } from 'react-native-elements'
+import { Button, Input, Text } from 'react-native-elements'
 import { auth } from '../firebase'
 
 
@@ -81,7 +81,5 @@ const styles = StyleSheet.create({
     button: {
         width: 200,
         marginTop: 10,
-
     }
-
 })

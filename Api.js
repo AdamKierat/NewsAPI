@@ -1,6 +1,3 @@
-import React from 'react'
-import { StyleSheet } from 'react-native'
-
 const api = () => {
     const getMoviesFromApiAsync = async (search_result) => {
         try {
@@ -18,7 +15,4 @@ const api = () => {
         { getMoviesFromApiAsync }
     )
 }
-
 export default api
-
-const styles = StyleSheet.create({})

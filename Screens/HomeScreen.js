@@ -1,17 +1,15 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react'
-import { StyleSheet, Text, View, SafeAreaView, Dimensions } from 'react-native'
-import { Avatar, ListItem, Image } from 'react-native-elements'
-import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
-import { auth, db } from "../firebase"
+import React from 'react'
+import { StyleSheet, SafeAreaView } from 'react-native'
+import { ScrollView } from 'react-native-gesture-handler'
+import { auth } from "../firebase"
 import CustomSearchBar from '../components/CustomSearchBar'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { selectAll } from '../redux/features/articlesSlice'
 import ArticleRowItem from '../components/ArticleRowItem'
 
 const HomeScreen = ({ navigation }) => {
 
     const isDark = useSelector((state) => state.darkMode.isDark)
-    const dispatch = useDispatch()
 
     const articles = useSelector(selectAll)
 
