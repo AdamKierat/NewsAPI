@@ -13,9 +13,6 @@ const HomeScreen = ({ navigation }) => {
     const isDark = useSelector((state) => state.darkMode.isDark)
     const dispatch = useDispatch()
 
-    const windowWidth = Dimensions.get('window').width;
-    const windowHeight = Dimensions.get('window').height;
-
     const articles = useSelector(selectAll)
 
 
@@ -27,7 +24,7 @@ const HomeScreen = ({ navigation }) => {
 
     return (
 
-        <SafeAreaView style={[styles.container, { backgroundColor: isDark ? "black" : "#fff" }]}>
+        <SafeAreaView style={[styles.container, { backgroundColor: isDark ? "#120f0f" : "#fff" }]}>
             <CustomSearchBar>
             </CustomSearchBar>
 
@@ -36,7 +33,7 @@ const HomeScreen = ({ navigation }) => {
                 {articles != null && (
                     articles.map((selectedItem, index) => (
                         <ArticleRowItem article={selectedItem} onPress={() => navigation.navigate('Article', { article: selectedItem })}
-                            windowWidth={windowWidth} windowHeight={windowHeight} index={index} />
+                            index={index} />
                     ))
                 )}
             </ScrollView>

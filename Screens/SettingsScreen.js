@@ -19,10 +19,10 @@ const SettingsScreen = ({ navigation }) => {
         });
     };
     return (
-        <View>
+        <View style={{ flex: 1, backgroundColor: isDark ? "#272121" : "#fff" }}>
             <Button
                 buttonStyle={{
-                    backgroundColor: "#fb9327",
+                    backgroundColor: isDark ? "#4F3112" : "#fb9327",
                 }}
                 onPress={() => dispatch(switchMode())}
                 icon={
@@ -35,7 +35,7 @@ const SettingsScreen = ({ navigation }) => {
             <TouchableOpacity onPress={signOutUser} activeOpacity={0.5} pressMagnification={0.5}>
                 <Button
                     buttonStyle={{
-                        backgroundColor: "#fb9327",
+                        backgroundColor: isDark ? "#4F3112" : "#fb9327",
                     }}
                     onPress={() => dispatch(switchMode())}
                     icon={

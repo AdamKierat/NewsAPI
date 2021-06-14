@@ -10,20 +10,24 @@ import { View } from "react-native";
 import { auth } from "../firebase";
 import { SimpleLineIcons } from "@expo/vector-icons";
 import FiltersScreen from "./FiltersScreen";
+import { useSelector, useDispatch } from 'react-redux'
 
 const Tab = createBottomTabNavigator();
 
 const BottomTabNavigator = ({ navigation }) => {
+    const isDark = useSelector((state) => state.darkMode.isDark)
+    const dispatch = useDispatch()
 
     const signOutUser = () => {
         auth.signOut().then(() => {
             navigation.replace("Login");
         });
     };
+
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "NewsAPP",
-            headerTitleStyle: { color: "black", },
+            headerTitleStyle: { color: isDark ? "#fff" : "black" },
             headerTintColor: "black",
             headerLeft: () => (
                 <View style={{ marginLeft: 15 }}>
@@ -41,8 +45,7 @@ const BottomTabNavigator = ({ navigation }) => {
                 </View>
             )
         })
-    }, [navigation])
-
+    }, [navigation, isDark])
 
     return (
         <Tab.Navigator
@@ -53,8 +56,8 @@ const BottomTabNavigator = ({ navigation }) => {
             tabBarOptions={{
                 activeTintColor: '#fff',
                 inactiveTintColor: 'lightgray',
-                activeBackgroundColor: "#fb9327",
-                inactiveBackgroundColor: "#fb9327",
+                activeBackgroundColor: isDark ? "#4F3112" : "#fb9327",
+                inactiveBackgroundColor: isDark ? "#4F3112" : "#fb9327",
                 keyboardHidesTabBar: true
             }}
         >

@@ -1,20 +1,24 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { Button } from 'react-native-elements'
+import { useSelector, useDispatch } from 'react-redux'
 
 const FiltersScreen = ({ navigation }) => {
+    const isDark = useSelector((state) => state.darkMode.isDark)
+    const dispatch = useDispatch()
+
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>
+        <View style={[styles.container, { backgroundColor: isDark ? "#272121" : "#fff" }]}>
+            <Text style={[styles.title, { color: isDark ? "#fff" : "#272121" }]}>
                 Filter articles by:
             </Text>
             <Button
                 title="Countries"
-                buttonStyle={styles.button}
+                buttonStyle={[styles.button, { backgroundColor: isDark ? "#4F3112" : "#fb9327" }]}
                 onPress={() => navigation.navigate('Countries')} />
             <Button
                 title="Categories"
-                buttonStyle={styles.button}
+                buttonStyle={[styles.button, { backgroundColor: isDark ? "#4F3112" : "#fb9327" }]}
                 onPress={() => navigation.navigate('Categories')} />
         </View>
     )
@@ -27,11 +31,9 @@ const styles = StyleSheet.create({
         width: 200,
         marginTop: 10,
         padding: 10,
-        backgroundColor: "#fb9327"
     },
     container: {
-        margin: 20,
-        justifyContent: 'center',
+        flex: 1,
         alignItems: 'center'
     },
     title: {
