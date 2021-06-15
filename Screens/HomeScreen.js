@@ -21,12 +21,9 @@ const HomeScreen = ({ navigation }) => {
     }
 
     return (
-
         <SafeAreaView style={[styles.container, { backgroundColor: isDark ? "#120f0f" : "#fff" }]}>
             <CustomSearchBar>
             </CustomSearchBar>
-
-
             <ScrollView>
                 {articles != null && (
                     articles.map((selectedItem, index) => (
@@ -43,6 +40,5 @@ export default HomeScreen
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // backgroundColor: isDark ? "#fb9327" : "black"
     }
 })
