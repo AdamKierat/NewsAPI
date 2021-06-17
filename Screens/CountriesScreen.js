@@ -4,7 +4,7 @@ import { countryList } from '../lib/countries.js'
 import { Avatar, ListItem } from 'react-native-elements'
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchByKeyword } from '../redux/features/articlesSlice'
+import { fetchByCountry } from '../redux/features/articlesSlice'
 
 const CountriesScreen = ({ navigation }) => {
     const dispatch = useDispatch()
@@ -14,7 +14,7 @@ const CountriesScreen = ({ navigation }) => {
     const fetchArticles = async (country) => {
         console.log(country)
         if (articlesStatus === 'IDLE' || articlesStatus === 'SUCCEEDED') {
-            dispatch(fetchByKeyword(country))
+            dispatch(fetchByCountry(country))
             console.info(articlesStatus)
         }
         navigation.replace('BottomTab')

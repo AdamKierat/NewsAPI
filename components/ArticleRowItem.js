@@ -18,7 +18,7 @@ export default function ArticleRowItem({ article, onPress, index }) {
                 borderRadius={5}
                 style={[styles.image]} />
             <View style={styles.descriptionContainer}>
-                <Text numberOfLines={5} style={[styles.dateText, { color: isDark ? "#fff" : "#686868" }]}>{article.title}</Text>
+                <Text numberOfLines={5} style={[styles.dateText, { color: isDark ? "#fff" : "#686868" }]}>{`${article.title.slice(0,70)}...`}</Text>
                 <View style={styles.dateContainer}>
                     <MaterialCommunityIcons name="clock-time-four-outline" color={isDark ? "#fff" : "#686868"} size={19} />
                     <Text style={[styles.dateText, { color: isDark ? "#fff" : "#686868" }]}>{format(new Date(article.publishedAt), "MMM d, yyyy")}</Text>
