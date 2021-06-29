@@ -25,6 +25,7 @@ const LoginScreen = ({ navigation }) => {
 
     useLayoutEffect(() => {
         navigation.setOptions({
+            headerStyle: { backgroundColor: "#fb9327" },
             title: 'Login',
         })
     }, [navigation])

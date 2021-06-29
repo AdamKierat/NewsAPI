@@ -13,13 +13,6 @@ const HomeScreen = ({ navigation }) => {
 
     const articles = useSelector(selectAll)
 
-
-    const signOutUser = () => {
-        auth.signOut().then(() => {
-            navigation.replace('Login')
-        })
-    }
-
     return (
         <SafeAreaView style={[styles.container, { backgroundColor: isDark ? "#120f0f" : "#fff" }]}>
             <CustomSearchBar>
