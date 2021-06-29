@@ -6,11 +6,15 @@ import {format} from "date-fns";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import {useSelector} from 'react-redux'
 import firebase from "../firebase";
+import { selectAll } from '../redux/features/articlesSlice'
+import ArticleRowItem from '../components/ArticleRowItem'
 
 const ArticleScreen = ({route, navigation}) => {
     console.ignoredYellowBox = ['Setting a timer'];
+    const similarSize = 5;
     const {article, otherParam} = route.params;
     const isDark = useSelector((state) => state.darkMode.isDark)
+    const articles = useSelector(selectAll)
     const [iconColor, seticonColor] = useState("white");
 
     const id_ = article.url.slice(8).replace(/\//g, '_')
@@ -103,7 +107,27 @@ const ArticleScreen = ({route, navigation}) => {
                 </View>
                 <Divider orientation="horizontal" height={1} color={'black'} margin={5} marginTop={10}
                          marginBottom={10}/>
-            </ScrollView></View>
+                <View style={styles.similarContainer}>
+                    <Text
+                        style={[styles.dateText, {color: isDark ? "#fff" : "#686868"}]}>
+                        similar news
+                    </Text>
+                    <ScrollView>
+                        {articles != null && (
+                            articles.slice(-(similarSize)).map((selectedItem, index) => {
+                                if ( selectedItem !== article){
+                                    return (
+                                        <ArticleRowItem article={selectedItem}
+                                                        onPress={() => navigation.navigate('Article', {article: selectedItem})}
+                                                        index={index}/>
+                                    )
+                                }
+                            })
+                        )}
+                    </ScrollView>
+                </View>
+            </ScrollView>
+        </View>
     )
 }
 export default ArticleScreen
@@ -118,4 +142,6 @@ const styles = StyleSheet.create({
     linkText: {fontSize: 19, fontWeight: 'bold', marginLeft: 5, color: "blue"},
     authorText: {fontSize: 20, marginLeft: 5, alignSelf: 'center'},
     dateContainer: {flexDirection: 'row', alignItems: 'center', justifyContent: 'center'},
+    similarText: {fontSize: 19, fontWeight: 'bold', textAlign: 'center', margin: 1},
+    similarContainer: {} //{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'},
 })

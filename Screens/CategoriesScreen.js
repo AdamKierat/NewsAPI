@@ -27,6 +27,7 @@ const CategoriesScreen = ({ navigation }) => {
                     <TouchableOpacity
                         style={styles.tile}
                         onPress={() => fetchArticles(selectedItem.category_name)}
+                        key={id}
                     >
                         <View style={{ flex: 1 }}>
                             <ListItem key={id} bottomDivider

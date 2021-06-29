@@ -12,6 +12,9 @@ import SettingsScreen from './SettingsScreen';
 import FiltersScreen from './FiltersScreen';
 import CategoriesScreen from './CategoriesScreen';
 import { useSelector } from 'react-redux'
+import {LogBox} from 'react-native';
+LogBox.ignoreLogs(['Warning: ...']);
+LogBox.ignoreAllLogs();
 
 const Stack = createStackNavigator();
 
