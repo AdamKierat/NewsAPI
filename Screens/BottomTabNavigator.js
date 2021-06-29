@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from "react";
+import React, { useLayoutEffect, useCallback, useState, useEffect } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { Avatar } from 'react-native-elements'
@@ -10,22 +10,39 @@ import { View } from "react-native";
 import { auth } from "../firebase";
 import FiltersScreen from "./FiltersScreen";
 import { useSelector, useDispatch } from 'react-redux'
+import firebase from "../firebase";
 
 const Tab = createBottomTabNavigator();
 
 const BottomTabNavigator = ({ navigation }) => {
 
     const isDark = useSelector((state) => state.darkMode.isDark)
+    const [imageState, setimageState] = useState(null)
+    const imageDB = firebase.db.collection("profileImages").doc(auth?.currentUser?.email);
 
+    const fetchImage = useCallback(async () => {
+        const call = imageDB.get().then((image) => {
+            if (image.exists) {
+                setimageState(image.data())
+            }
+        })
+
+
+    }, [])
+
+    useEffect(() => {
+        fetchImage()
+    }, [])
     useLayoutEffect(() => {
         navigation.setOptions({
             title: "NewsAPP",
             headerTitleStyle: { color: isDark ? "#fff" : "black" },
             headerTintColor: "black",
             headerLeft: () => (
+
                 <View style={{ marginLeft: 15 }}>
                     <TouchableOpacity activeOpacity={0.5}>
-                        <Avatar rounded source={{ uri: auth?.currentUser?.photoURL }} />
+                        <Avatar rounded source={{ uri: imageState?.image?.localUri }} />
                     </TouchableOpacity>
                 </View>
             ),
@@ -38,7 +55,7 @@ const BottomTabNavigator = ({ navigation }) => {
                 </View>
             )
         })
-    }, [navigation, isDark])
+    }, [navigation, isDark, imageState])
 
     return (
         <Tab.Navigator
