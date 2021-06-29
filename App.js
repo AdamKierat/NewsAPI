@@ -6,7 +6,7 @@ import LayoutContainer from './screens/LayoutContainer';
 export default function App() {
     return (
         <Provider store={store}>
-            <LayoutContainer></LayoutContainer>
+            <LayoutContainer/>
         </Provider>
     );
 }
