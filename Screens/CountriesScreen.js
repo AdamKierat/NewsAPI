@@ -12,7 +12,6 @@ const CountriesScreen = ({ navigation }) => {
     const isDark = useSelector((state) => state.darkMode.isDark)
 
     const fetchArticles = async (country) => {
-        console.log(country)
         if (articlesStatus === 'IDLE' || articlesStatus === 'SUCCEEDED') {
             dispatch(fetchByCountry(country))
             console.info(articlesStatus)
@@ -24,7 +23,7 @@ const CountriesScreen = ({ navigation }) => {
         <SafeAreaView style={styles.container}>
             <ScrollView>
                 {countryList.map((selectedItem, id) => (
-                    <TouchableOpacity onPress={() => fetchArticles(selectedItem.name)}>
+                    <TouchableOpacity onPress={() => fetchArticles(selectedItem.name)} key={id}>
                         <View style={{ flex: 1 }}>
                             <ListItem
                                 key={id}
