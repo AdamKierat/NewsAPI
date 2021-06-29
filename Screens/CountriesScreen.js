@@ -12,7 +12,6 @@ const CountriesScreen = ({ navigation }) => {
     const isDark = useSelector((state) => state.darkMode.isDark)
 
     const fetchArticles = async (country) => {
-        console.log(country)
         if (articlesStatus === 'IDLE' || articlesStatus === 'SUCCEEDED') {
             dispatch(fetchByCountry(country))
             console.info(articlesStatus)

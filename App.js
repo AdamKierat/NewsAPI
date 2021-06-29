@@ -9,7 +9,7 @@ LogBox.ignoreLogs(['Setting a timer']);
 export default function App() {
     return (
         <Provider store={store}>
-            <LayoutContainer></LayoutContainer>
+            <LayoutContainer/>
         </Provider>
     );
 }

@@ -1,9 +1,9 @@
-import React, { useState, useLayoutEffect, useEffect } from 'react'
-import { StyleSheet, View, SafeAreaView } from 'react-native'
-import { Button, Input, Image } from 'react-native-elements'
-import { auth } from '../firebase'
+import React, {useEffect, useLayoutEffect, useState} from 'react'
+import {SafeAreaView, StyleSheet, View} from 'react-native'
+import {Button, Image, Input} from 'react-native-elements'
+import {auth} from '../firebase'
 
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = ({navigation}) => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -15,17 +15,16 @@ const LoginScreen = ({ navigation }) => {
     }
 
     useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged((authUser) => {
+        return auth.onAuthStateChanged((authUser) => {
             if (authUser) {
                 navigation.replace('BottomTab')
             }
-        })
-        return unsubscribe;
+        });
     }, [])
 
     useLayoutEffect(() => {
         navigation.setOptions({
-            headerStyle: { backgroundColor: "#fb9327" },
+            headerStyle: {backgroundColor: "#fb9327"},
             title: 'Login',
         })
     }, [navigation])
@@ -37,7 +36,7 @@ const LoginScreen = ({ navigation }) => {
             <Image source={{
                 uri: "https://cdn.pixabay.com/photo/2018/10/26/09/24/news-3774160_1280.png"
             }}
-                style={{ width: 180, height: 180 }} />
+                   style={{width: 180, height: 180}}/>
             <View style={styles.inputContainer}>
 
                 <Input
@@ -45,7 +44,7 @@ const LoginScreen = ({ navigation }) => {
                     autoFocus
                     type="email"
                     value={email}
-                    onChangeText={(text) => setEmail(text)} />
+                    onChangeText={(text) => setEmail(text)}/>
 
                 <Input
                     placeholder="Password"
@@ -58,21 +57,21 @@ const LoginScreen = ({ navigation }) => {
 
                 <Button
                     onPress={singIn}
-                    buttonStyle={{ backgroundColor: "#fb9327" }}
+                    buttonStyle={{backgroundColor: "#fb9327"}}
                     containerStyle={styles.button}
-                    title="Login" />
+                    title="Login"/>
 
                 <Button
                     onPress={() => navigation.navigate('Register')}
-                    titleStyle={{ color: "#fcbb39" }}
-                    buttonStyle={{ borderColor: "#fb9327" }}
+                    titleStyle={{color: "#fcbb39"}}
+                    buttonStyle={{borderColor: "#fb9327"}}
                     containerStyle={styles.button}
                     type="outline"
                     title="Register"
                 />
 
             </View>
-            <View style={{ height: 10 }}></View>
+            <View style={{height: 10}}/>
         </SafeAreaView>
     )
 }
