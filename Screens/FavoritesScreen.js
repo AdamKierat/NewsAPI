@@ -6,7 +6,7 @@ import ArticleRowItem from '../components/ArticleRowItem'
 import firebase from "../firebase";
 
 
-const FavoritesScreen = ({ navigation }) => {
+const FavoritesScreen = ({navigation}) => {
     const isDark = useSelector((state) => state.darkMode.isDark)
 
     const [articles, setArticles] = useState([]);
@@ -21,12 +21,12 @@ const FavoritesScreen = ({ navigation }) => {
     }, [])
 
     return (
-        <SafeAreaView style={[styles.container, { backgroundColor: isDark ? "#120f0f" : "#fff" }]}>
+        <SafeAreaView style={[styles.container, {backgroundColor: isDark ? "#120f0f" : "#fff"}]}>
             <ScrollView>
                 {articles != null && (
-                    articles.map(({data, id} ) => (
-                        <ArticleRowItem article={data} onPress={() => navigation.navigate('Article', { article: data })}
-                                        index={id} />
+                    articles.map(({data, id}) => (
+                        <ArticleRowItem article={data} onPress={() => navigation.navigate('Article', {article: data})}
+                                        index={id}/>
                     ))
                 )}
             </ScrollView>

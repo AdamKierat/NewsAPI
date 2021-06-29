@@ -1,7 +1,7 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
 import {StatusTypes} from '../../lib/constants'
-import request from '../../services/request'
 import {API_KEY} from '@env'
+import request from '../../services/request'
 
 
 export const fetchByKeyword = createAsyncThunk('articles/fetchByKeyword', async (keyword) => {
@@ -50,24 +50,24 @@ const articlesSlice = createSlice({
                     return (markerDate === today);
                 });
             } else if (action.payload === 'week') {
-                var firstWeekDay = new Date(today.setDate(today.getDate() - today.getDay() + 1)).setHours(0,0,0,0);
-                var lastWeekDay = new Date(today.setDate(today.getDate() - today.getDay() + 7)).setHours(0,0,0,0);
+                var firstWeekDay = new Date(today.setDate(today.getDate() - today.getDay() + 1)).setHours(0, 0, 0, 0);
+                var lastWeekDay = new Date(today.setDate(today.getDate() - today.getDay() + 7)).setHours(0, 0, 0, 0);
                 state.items = state.items.filter(function (data) {
-                    var markerDate = new Date(data.publishedAt).setHours(0,0,0,0);
+                    var markerDate = new Date(data.publishedAt).setHours(0, 0, 0, 0);
 
                     return (markerDate >= firstWeekDay && markerDate <= lastWeekDay);
                 });
             } else if (action.payload === 'month') {
-                var firstMonthDay = new Date(today.getFullYear(), today.getMonth(), 1).setHours(0,0,0,0);
+                var firstMonthDay = new Date(today.getFullYear(), today.getMonth(), 1).setHours(0, 0, 0, 0);
 
                 state.items = state.items.filter(function (data) {
-                    var markerDate = new Date(data.publishedAt).setHours(0,0,0,0);
+                    var markerDate = new Date(data.publishedAt).setHours(0, 0, 0, 0);
 
                     return (markerDate >= firstMonthDay);
                 });
             }
         },
-        clearFilter: (state, action) => {
+        clearFilter: (state) => {
             state.items = state.itemsCopy;
             state.itemsCopy = [];
         },

@@ -23,7 +23,7 @@ const CountriesScreen = ({ navigation }) => {
         <SafeAreaView style={styles.container}>
             <ScrollView>
                 {countryList.map((selectedItem, id) => (
-                    <TouchableOpacity onPress={() => fetchArticles(selectedItem.name)}>
+                    <TouchableOpacity onPress={() => fetchArticles(selectedItem.name)} key={id}>
                         <View style={{ flex: 1 }}>
                             <ListItem
                                 key={id}
