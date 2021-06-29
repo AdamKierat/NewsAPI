@@ -7,7 +7,7 @@ import { fetchByKeyword, selectAll } from '../redux/features/articlesSlice'
 
 const CustomSearchBar = () => {
 
-    const [keyword, setKeyword] = useState("Apple");
+    const [keyword, setKeyword] = useState("");
     const dispatch = useDispatch()
     const articlesStatus = useSelector(state => state.articles.status)
     const isDark = useSelector((state) => state.darkMode.isDark)
