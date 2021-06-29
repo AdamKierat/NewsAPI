@@ -1,4 +1,4 @@
-import React, {useEffect, useLayoutEffect, useState, useCallback} from "react";
+import React, {useCallback, useEffect, useLayoutEffect, useState} from "react";
 import {Dimensions, Linking, StyleSheet, Text, View} from 'react-native'
 import {Divider, Image} from 'react-native-elements'
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
@@ -6,13 +6,13 @@ import {format} from "date-fns";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import {useSelector} from 'react-redux'
 import firebase from "../firebase";
-import { selectAll } from '../redux/features/articlesSlice'
+import {selectAll} from '../redux/features/articlesSlice'
 import ArticleRowItem from '../components/ArticleRowItem'
 
 const ArticleScreen = ({route, navigation}) => {
     console.ignoredYellowBox = ['Setting a timer'];
     const similarSize = 5;
-    const {article, otherParam} = route.params;
+    const {article} = route.params;
     const isDark = useSelector((state) => state.darkMode.isDark)
     const articles = useSelector(selectAll)
     const [iconColor, seticonColor] = useState("white");
@@ -23,7 +23,7 @@ const ArticleScreen = ({route, navigation}) => {
     const addFavArticle = useCallback(async () => {
         const doc = await articleDB.get()
 
-        if(doc.exists){
+        if (doc.exists) {
             seticonColor('white')
             try {
                 await articleDB.delete();
@@ -43,7 +43,7 @@ const ArticleScreen = ({route, navigation}) => {
     useEffect(() => {
         const fetchDoc = async () => {
             const doc = await articleDB.get()
-            if(doc.exists){
+            if (doc.exists) {
                 seticonColor('red')
             } else {
                 seticonColor('white')
@@ -115,7 +115,7 @@ const ArticleScreen = ({route, navigation}) => {
                     <ScrollView>
                         {articles != null && (
                             articles.slice(-(similarSize)).map((selectedItem, index) => {
-                                if ( selectedItem !== article){
+                                if (selectedItem !== article) {
                                     return (
                                         <ArticleRowItem article={selectedItem}
                                                         onPress={() => navigation.navigate('Article', {article: selectedItem})}
