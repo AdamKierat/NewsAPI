@@ -1,22 +1,42 @@
 import React, { useState } from 'react'
-import { SafeAreaView } from 'react-native'
+import { SafeAreaView, TouchableOpacity } from 'react-native'
 import { View, StyleSheet } from 'react-native'
 import { Button, Input, Text } from 'react-native-elements'
-import { auth } from '../firebase'
-
+import { auth} from '../firebase'
+import * as ImagePicker from 'expo-image-picker';
+import firebase from "../firebase";
 
 const RegisterScreen = ({ navigation }) => {
+    const openImagePickerAsync = async () => {
+        let permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+        if (permissionResult.granted === false) {
+            alert('Permission to access camera roll is required!');
+            return;
+        }
+
+        let pickerResult = await ImagePicker.launchImageLibraryAsync();
+
+        if (pickerResult.cancelled === true) {
+            return;
+        }
+
+        setSelectedImage({ localUri: pickerResult.uri });
+    };
+
+
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [imageURL, setImageURL] = useState("");
+    const [selectedImage, setSelectedImage] = useState('assets/765-default-avatar.png');
 
     const register = () => {
         auth.createUserWithEmailAndPassword(email, password)
             .then(authUser => {
-                authUser.user.updateProfile({
-                    photoURL: imageURL ||
-                        "http://s3.amazonaws.com/37assets/svn/765-default-avatar.png"
-                })
+                firebase.db.collection('profileImages').doc(email).set({image:selectedImage})
+            })
+            .then(() => {
+                console.log("Image successfully written!");
             })
             .catch(error => alert(error.message));
 
@@ -44,16 +64,11 @@ const RegisterScreen = ({ navigation }) => {
                     onChangeText={(text) => setPassword(text)}
                 />
 
-                <Input
-                    placeholder="Profile picture URL (optional)"
-                    type="text"
-                    value={imageURL}
-                    onChangeText={(text) => setImageURL(text)}
-                    onSubmitEditing={register}
-                />
-
 
             </View>
+            <TouchableOpacity onPress={openImagePickerAsync} style={styles.imageButton} >
+                <Text style={styles.imageButtonText} >Profile picture (optional)</Text>
+            </TouchableOpacity>
             <Button
                 containerStyle={styles.button}
                 buttonStyle={{ backgroundColor: "#fb9327" }}
@@ -74,6 +89,18 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         padding: 10,
         backgroundColor: "#fff",
+    },
+    imageButton: {
+        width: 250,
+        height: 40,
+        alignContent: 'center',
+        justifyContent: 'center',
+        backgroundColor: "grey",
+        borderRadius: 50
+    },
+    imageButtonText: {
+        textAlign: 'center',
+        fontSize: 20
     },
     inputContainer: {
         width: 300
