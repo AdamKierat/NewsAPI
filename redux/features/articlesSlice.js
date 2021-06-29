@@ -76,7 +76,6 @@ const articlesSlice = createSlice({
         // by keyword
         [fetchByKeyword.pending]: (state) => {
             state.status = StatusTypes.LOADING
-            console.info('API ZAPYTANIE TRWA:')
         },
         [fetchByKeyword.fulfilled]: (state, action) => {
             state.status = StatusTypes.SUCCEEDED

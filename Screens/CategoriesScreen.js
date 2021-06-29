@@ -13,7 +13,6 @@ const CategoriesScreen = ({ navigation }) => {
     const isDark = useSelector((state) => state.darkMode.isDark)
 
     const fetchArticles = async (category) => {
-        console.log(category)
         if (articlesStatus === 'IDLE' || articlesStatus === 'SUCCEEDED') {
             dispatch(fetchByCategory(category))
         }
